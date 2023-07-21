@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'level' => ['required', Rule::in(['admin', 'manajer', 'kasir'])], //tambahkan validasi level
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'alamat' => ['string', 'max:255'],
-            'no_hp' => ['numeric', 'min:11'],
+            'no_hp' => ['numeric'],
 
         ], [
             'name.required' => 'Nama harus diisi',
@@ -77,7 +77,6 @@ class RegisterController extends Controller
             'alamat.string' => 'Alamat harus berupa string',
             'alamat.max' => 'Alamat maksimal 255 karakter',
             'no_hp.numeric' => 'No HP harus berupa angka',
-            'no_hp.min' => 'No HP minimal 11 angka',
         ]);
         if ($Validator->fails()) {
             throw new ValidationException($Validator);

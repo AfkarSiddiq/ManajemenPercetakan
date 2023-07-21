@@ -55,7 +55,7 @@
                             <label for="no_hp" class="col-md-4 col-form-label text-md-right">{{ __('No hp') }}</label>
 
                             <div class="col-md-7">
-                                <input id="no_hp" type="number" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" value="{{ old('name', Auth::user()->no_hp) }}" required autocomplete="no_hp" autofocus>
+                                <input id="no_hp" type="number" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" value="{{ old('no_hp', Auth::user()->no_hp) }}" required autocomplete="no_hp" autofocus>
 
                                 @error('no_hp')
                                 <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                             <div class="col-md-7">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('name', Auth::user()->email) }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', Auth::user()->email) }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -83,7 +83,7 @@
                             <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
 
                             <div class="col-md-7">
-                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('name', Auth::user()->alamat) }}" required autocomplete="alamat" autofocus>
+                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat', Auth::user()->alamat) }}" required autocomplete="alamat" autofocus>
 
                                 @error('alamat')
                                 <span class="invalid-feedback" role="alert">

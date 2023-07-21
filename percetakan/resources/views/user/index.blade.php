@@ -19,6 +19,24 @@
                 </script>
             </div>
             @endif
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger" hidden>
+                <p id="message">{{ $message }}</p>
+                <script>
+                    Swal.fire({
+                        title: 'Error',
+                        text: $('#message').text(),
+                        icon: 'Error',
+                        confirmButtonText: 'Cool'
+                    })
+                </script>
+            </div>
+            @endif
+            <div class="row">
+                <div class="col-md-4 .offsife-md-8">
+                    <a href="{{url('/register')}}"> <button type="button" class="btn btn-success">Daftarkan akun</button></a>
+                </div>
+            </div>
             <br />
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle" id="datatablesSimple">
@@ -54,7 +72,7 @@
                                         Ubah Level
                                     </a>
                                     @endif
-                                    <button class="btn btn-danger btn-sm" onclick="showConfirmationDialog(event)">
+                                    <button class="btn btn-danger btn-sm show_confirm">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
@@ -66,37 +84,26 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 .offsife-md-2">
-                <a href="{{url('/register')}}"> <button type="button" class="btn btn-success">Daftarkan akun</button></a>
-            </div>
-        </div>
+
         <br>
     </div>
 </div>
 <!-- </div> -->
-<script>
-    function showConfirmationDialog(e) {
-        e = e || window.event;
-        e.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('afkar ganteng')
-                // Trigger the form submission to delete the record
-                document.getElementById('deleteForm').submit();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // User canceled the action, show a message or redirect as needed
-                Swal.fire('Cancelled', 'The Account delete is cancelled', 'error');
-            }
-        });
-    }
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) form.submit();
+            });
+    })
 </script>
 @endsection

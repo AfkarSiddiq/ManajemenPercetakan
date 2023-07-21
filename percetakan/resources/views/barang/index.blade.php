@@ -84,7 +84,8 @@
                                     </a>
                                     @if (Auth::user()->level == 'admin')
                                     <!-- hapus data -->
-                                    <button id='delete' class="btn btn-danger" onclick='showConfirmationDialog(event)'>
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button id='delete' class="btn btn-danger show_confirm">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     @endif
@@ -100,28 +101,23 @@
         </div>
     </div>
 </div>
-<script>
-    function showConfirmationDialog(e) {
-        e = e || window.event;
-        e.preventDefault();
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('afkar ganteng')
-                // Trigger the form submission to delete the record
-                document.getElementById('deleteForm').submit();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                // User canceled the action, show a message or redirect as needed
-                Swal.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
-            }
-        });
-    }
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            })
+            .then((willDelete) => {
+                if (willDelete) form.submit();
+            });
+    })
 </script>
 @endsection
